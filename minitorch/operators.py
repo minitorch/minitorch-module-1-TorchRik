@@ -4,7 +4,6 @@ Collection of the core mathematical operators used throughout the code base.
 
 import math
 import typing as tp
-from typing import Callable, Iterable
 
 # ## Task 0.1
 #
@@ -101,14 +100,18 @@ def map(
     return lambda values: (fn(row) for row in values)
 
 
-def zipWith(fn: tp.Callable) -> tp.Callable:
+def zipWith(
+        fn: tp.Callable[[float, float], float]
+) -> tp.Callable[[tp.Iterable[float], tp.Iterable[float]], tp.Iterable[float]]:
     return lambda left_value, right_values: (
         fn(left_value, right_values)
         for left_value, right_values in zip(left_value, right_values)
     )
 
 
-def reduce(func: tp.Callable) -> tp.Callable:
+def reduce(
+        func: tp.Callable[[float, float], float]
+) -> tp.Callable[[tp.Iterable[float]], float]:
     def foo(values: tp.Iterable[float]) -> float:
         prev_val = None
         for val in values:

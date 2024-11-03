@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from _ast import Eq
 from dataclasses import dataclass
 from typing import Any, Iterable, Optional, Sequence, Tuple, Type, Union
 

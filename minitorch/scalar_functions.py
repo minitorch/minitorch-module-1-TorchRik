@@ -6,7 +6,7 @@ import minitorch
 
 from . import operators
 from .autodiff import Context
-from .operators import inv_back, sigmoid, relu_back
+from .operators import inv_back, relu_back
 
 if TYPE_CHECKING:
     from typing import Tuple
@@ -152,7 +152,7 @@ class Sigmoid(ScalarFunction):
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
         (res_sigmoid,) = ctx.saved_values
-        return res_sigmoid * (1 - res_sigmoid) * d_output
+        return float(res_sigmoid * (1 - res_sigmoid) * d_output)
 
 
 class ReLU(ScalarFunction):
@@ -181,7 +181,7 @@ class Exp(ScalarFunction):
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
         (res_exp,) = ctx.saved_values
-        return res_exp * d_output
+        return float(res_exp * d_output)
 
 
 class LT(ScalarFunction):
